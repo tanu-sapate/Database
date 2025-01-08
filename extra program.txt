@@ -1,0 +1,310 @@
+string reverse==
+
+#include<iostream>
+#include<string.h>
+using namespace std;
+int main ()
+{
+    char str[50], temp;
+    int i, j;
+    cout << "Enter a string : ";
+    gets(str);
+    j = strlen(str) - 1;
+    for (i = 0; i < j; i++,j--)
+    {
+        temp = str[i];
+        str[i] = str[j];
+        str[j] = temp;
+    }
+    cout << "\nReverse string : " << str;
+    return 0;
+}
+
+=======================================
+string pallindrom
+
+#include <iostream>
+#include <string.h>
+using namespace std;
+int main()
+{
+    char str1[20], str2[20];
+    int i, j, len = 0, flag = 0;
+    cout << "Enter the string : ";
+    gets(str1);
+    len = strlen(str1) - 1;
+    for (i = len, j = 0; i >= 0 ; i--, j++)
+        str2[j] = str1[i];
+    if (strcmp(str1, str2))
+        flag = 1;
+    if (flag == 1)
+        cout << str1 << " is not a palindrome";
+    else
+        cout << str1 << " is a palindrome";
+    return 0;
+}
+
+===========================================
+transport 3*3 matrix
+
+#include<iostream>
+using namespace std;
+ 
+int main()
+{
+    int mat[3][3], trans_mat[3][3];
+ 
+    /* Initializing Mat1 and Mat2 */
+    for (int i = 0; i < 3; i++)
+    { 
+        for (int j = 0; j < 3; j++)
+        {
+            cin >> mat[i][j];	
+        }
+    }
+ 
+    /* Transposing elements of the matrix */
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            trans_mat[j][i] = mat[i][j];	
+        }
+    }
+ 
+    cout << "Transpose of the Given 3x3 Matrix : " << endl;
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            cout << trans_mat[i][j] << "\t";	
+        }
+        cout << endl;
+    }
+}
+======================================
+
+smallest and largest in arrray
+
+#include<iostream>
+using namespace std;
+int main ()
+{
+    int A[10], n, i, j, x;
+    cout << "Enter size of array : ";
+    cin >> n;
+    cout << "Enter elements of array : ";
+    for (i = 0; i < n; i++)
+        cin >> A[i];    
+    for (i = 0; i < n; i++)
+    {
+        for (j = i + 1; j < n; j++)
+        {
+            if (A[i] < A[j])
+            {
+                x = A[i];
+                A[i] = A[j];
+                A[j] = x;
+            }
+        }
+    }
+    cout << "Second largest number : " << A[1];
+    cout << "\nSecond smallest number : " << A[n - 2];
+    return 0;
+}
+
+==========================================
+matrix and interchange diagonals
+
+#include<iostream>
+using namespace std;
+int main ()
+{
+    int i, j, m, n, x, A[10][10]; 
+    cout << "Enter number of rows and columns : ";
+    cin >> m >> n;
+    if (m != n)
+    {
+        cout << "Matrix is not a square matrix!";
+        exit(0);
+    }
+    cout << "Enter elements of matrix : ";
+    for (i = 0; i < m; i++)
+        for (j = 0; j < n; j++)	
+            cin >> A[i][j];
+    cout << "Matrix : \n ";
+    for (i = 0; i < m; i++)
+    {
+        for (j = 0; j < n; j++)
+            cout << A[i][j] << " ";
+        cout << "\n ";
+    }
+    for (i = 0; i < m; i++)
+    {
+        x = A[i][i];
+        A[i][i] = A[i][m - i - 1];
+        A[i][m - i - 1] = x;
+    }
+    cout << "\nMatrix after changing the diagonals : \n ";
+    for (i = 0; i < m; i++)
+    {
+        for (j = 0; j < n; j++)
+            cout << A[i][j] << " ";
+        cout << "\n ";
+    }
+    return 0;
+}
+===========================================
+adjacency matrix
+
+#include <iostream>
+#include <cstdlib>
+using namespace std;
+#define MAX 20
+/*
+ * Adjacency Matrix Class
+ */
+class AdjacencyMatrix
+{
+    private:
+        int n;
+        int **adj;
+        bool *visited;
+    public:
+        AdjacencyMatrix(int n)
+        {
+            this->n = n;
+            visited = new bool [n];
+            adj = new int* [n];
+            for (int i = 0; i < n; i++)
+            {
+                adj[i] = new int [n];
+                for(int j = 0; j < n; j++)
+                {
+                    adj[i][j] = 0;
+                }
+            }
+        }
+        /*
+         * Adding Edge to Graph
+         */ 
+        void add_edge(int origin, int destin)
+        {
+            if( origin > n || destin > n || origin < 0 || destin < 0)
+            {   
+                cout<<"Invalid edge!\n";
+            }
+            else
+            {
+                adj[origin - 1][destin - 1] = 1;
+            }
+        }
+        /*
+         * Print the graph
+         */ 
+        void display()
+        {
+            int i,j;
+            for(i = 0;i < n;i++)
+            {
+                for(j = 0; j < n; j++)
+                    cout<<adj[i][j]<<"  ";
+                cout<<endl;
+            }
+        }
+};
+/*
+ * Main
+ */ 
+int main()
+{
+    int nodes, max_edges, origin, destin;
+    cout<<"Enter number of nodes: ";
+    cin>>nodes;
+    AdjacencyMatrix am(nodes);
+    max_edges = nodes * (nodes - 1);
+    for (int i = 0; i < max_edges; i++)
+    {
+        cout<<"Enter edge (-1 -1 to exit): ";
+        cin>>origin>>destin;
+        if((origin == -1) && (destin == -1))
+            break;
+        am.add_edge(origin, destin);
+    }
+    am.display();
+    return 0;
+}
+===========================================
+sum and product of an arry
+
+#include<iostream>
+using namespace std;
+int main ()
+{
+    int arr[10], n, i, sum = 0, pro = 1;
+    cout << "Enter the size of the array : ";
+    cin >> n;
+    cout << "\nEnter the elements of the array : ";
+    for (i = 0; i < n; i++)
+    cin >> arr[i];
+    for (i = 0; i < n; i++)
+    {
+        sum += arr[i];
+        pro *= arr[i];
+    }
+    cout << "\nSum of array elements : " << sum;
+    cout << "\nProduct of array elements : " << pro;
+    return 0;
+}
+=============================================
+
+n0 reverse
+
+#include<iostream>
+using namespace std;
+ 
+int main()
+{
+    int num, rev = 0;
+    cout << "Enter a number : ";
+    cin >> num;
+    for (int temp = num; temp != 0; temp /= 10)
+    {
+        int r = temp % 10;
+        rev = rev * 10 + r;
+    }
+    cout << "\nThe reverse of " << num << " is : " << rev;
+    return 0;
+}
+===================================================
+
+n0 pallindrom or not
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+     int n, num, digit, rev = 0;
+
+     cout << "Enter a positive number: ";
+     cin >> num;
+
+     n = num;
+
+     do
+     {
+         digit = num % 10;
+         rev = (rev * 10) + digit;
+         num = num / 10;
+     } while (num != 0);
+
+     cout << " The reverse of the number is: " << rev << endl;
+
+     if (n == rev and n > 0)  // Negative numbers are not palindromic
+         cout << " The number is a palindrome.";
+     else
+         cout << " The number is not a palindrome.";
+
+    return 0;
+}
